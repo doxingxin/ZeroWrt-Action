@@ -3,13 +3,13 @@ clear
 
 # 使用特定的优化
 sed -i 's/-mcpu=generic/-march=armv7-a+neon-vfpv4+crypto/g' include/target.mk
-sed -i 's,kmod-r8168,kmod-r8169,g' target/linux/rockchip/image/armv8.mk
+# sed -i 's,kmod-r8168,kmod-r8169,g' target/linux/rockchip/image/armv8.mk
 
 find ./ -name *.orig | xargs rm -f
 find ./ -name *.rej | xargs rm -f
 
 # Vermagic
-curl -s https://downloads.openwrt.org/releases/24.10.1/targets/rockchip/armv8/openwrt-24.10.1-rockchip-armv8.manifest \
+curl -s https://downloads.openwrt.org/releases/24.10.1/targets/ipq40xx/generic/openwrt-24.10.1-ipq40xx-generic.manifest \
 | grep "^kernel -" \
 | awk '{print $3}' \
 | sed -n 's/.*~\([a-f0-9]\+\)-r[0-9]\+/\1/p' > vermagic
