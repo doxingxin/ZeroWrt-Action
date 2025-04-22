@@ -48,7 +48,7 @@ jobs:
     - name: Prepare Mixedwrt
       run: |
         sudo chown -R runner:runner /home/runner/work/ZeroWrt-Action
-        cp -r ./SCRIPTS/Rockchip/. ./SCRIPTS/
+        cp -r ./SCRIPTS/P2W_R619AC/. ./SCRIPTS/
         cp -r ./SCRIPTS/. ./
         /bin/bash 01_get_ready.sh
         
@@ -57,7 +57,7 @@ jobs:
       run: |
         cp -r ../SCRIPTS/. ./
         /bin/bash 02_prepare_package.sh
-        /bin/bash 03_custom_settings_rk.sh
+        /bin/bash 03_custom_settings_P2W_R619AC.sh
 #        /bin/bash 04_remove_upx.sh
         
     - name: QTMDFW4
@@ -138,8 +138,8 @@ jobs:
       run: |
         rm -rf ./artifact/
         mkdir -p ./artifact/
-        mv openwrt/bin/targets/rockchip/armv8/*sysupgrade.img* ./artifact/
-        cd openwrt/bin/targets/rockchip/armv8
+        mv openwrt/bin/targets/ipq40xx/generic/*sysupgrade.bin* ./artifact/
+        cd openwrt/bin/targets/ipq40xx/generic
         echo "KERNEL=$(cat *.manifest | grep ^kernel | cut -d- -f2 | tr -d ' ')" >> $GITHUB_ENV
         
     - name: Create release
@@ -157,7 +157,7 @@ jobs:
         body: |
           **This is OpenWrt Firmware**
           ### 📒 固件信息
-          - 💻 平台架构: rockchip-armv8、x86
+          - 💻 平台架构: ipq40xx
           - ⚽ 固件源码: https://github.com/openwrt/openwrt
           - 💝 源码分支: ${{ env.latest_release }}
           - 🚀 内核版本: ${{ env.KERNEL }}
