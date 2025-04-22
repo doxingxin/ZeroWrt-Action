@@ -3,7 +3,6 @@ clear
 
 # 使用特定的优化
 sed -i 's/-mcpu=generic/-march=armv7-a+neon-vfpv4+crypto/g' include/target.mk
-# sed -i 's,kmod-r8168,kmod-r8169,g' target/linux/rockchip/image/armv8.mk
 
 find ./ -name *.orig | xargs rm -f
 find ./ -name *.rej | xargs rm -f
@@ -27,7 +26,7 @@ src/gz openwrt_core https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/24.10.
 EOF
 
 # default-settings
-git clone --depth=1 -b aarch64 https://github.com/oppen321/default-settings package/default-settings
+git clone --depth=1 -b ipq40xx https://github.com/doxingxin/default-settings package/default-settings
 
 # ZeroWrt选项菜单
 mkdir -p files/bin
